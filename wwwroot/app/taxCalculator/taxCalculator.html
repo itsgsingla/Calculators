@@ -46,8 +46,12 @@
          <div class="form-horizontal">
             <div class="adl-form-group col-10 tax-marginD">
                 <label class="control-label col-35">Your Current Age</label>
-              <div class="col-4 input-with-icon adl-no-paddingL">
+              <div class="col-4 input-with-icon adl-no-paddingL" [ngClass]="{'has-error':!myForm.controls['Age'].valid && myForm.controls['Age'].touched, 'has-success': myForm.controls['Age'].valid && myForm.controls['Age'].touched}">
                    <input type="text" class="form-control" formControlName="Age" name="Age" id="Age" placeholder="00 Years" />
+                    <div *ngIf="myForm.controls['Age'].hasError('required') && myForm.controls['Age'].touched" class="alert alert-danger">Current Age is required!</div>
+                    <div *ngIf="myForm.controls['Age'].hasError('minlength') && myForm.controls['Age'].touched" class="alert alert-danger">Minimum age shud be greater than 0</div>
+                    <div *ngIf="myForm.controls['Age'].hasError('maxlength') && myForm.controls['Age'].touched" class="alert alert-danger">Maximum age shud be less than 100</div>
+                    <div *ngIf="myForm.controls['Age'].hasError('pattern') && myForm.controls['Age'].touched" class="alert alert-danger">Characters are not allowed!</div>
                </div>
             </div>
         </div>         
@@ -55,9 +59,10 @@
          <div class="form-horizontal">
             <div class="adl-form-group col-10 tax-marginD">
                 <label class="control-label col-35">Income Details</label>
-              <div class="col-4 input-with-icon adl-no-paddingL">
-                   <input type="text" placeholder="000,000" formControlName="TotalIncome" #TotalIncome name="TotalIncome" id="TotalIncome" style="padding-left:40px" class="form-control text-right" />
+              <div class="col-4 input-with-icon adl-no-paddingL" [ngClass]="{'has-error':!myForm.controls['TotalIncome'].valid && myForm.controls['TotalIncome'].touched, 'has-success': myForm.controls['TotalIncome'].valid && myForm.controls['TotalIncome'].touched}">
+                   <input type="text" placeholder="000,000" formControlName="TotalIncome" name="TotalIncome" id="TotalIncome" style="padding-left:40px" class="form-control text-right" />
                               <span class="icon-left input-icon-text">$</span>
+                                    <div class="alert alert-danger" *ngIf="!myForm.controls['TotalIncome'].valid && myForm.controls['TotalIncome'].touched">Income Details is required!</div>
                </div>
               <div class="col-25 adl-no-paddingL">
                         <button type="button" id="test" class="adl-btn adl-no-margin adl-floatR" (click)="hiddenincome=!hiddenincome;emptyIncome();" >Add</button>
@@ -68,9 +73,10 @@
          <div class="form-horizontal">
             <div class="adl-form-group col-10 tax-marginD">
                 <label class="control-label col-35">Tax Deductible Expenses</label>
-              <div class="col-4 input-with-icon adl-no-paddingL">
+              <div class="col-4 input-with-icon adl-no-paddingL" [ngClass]="{'has-error':!myForm.controls['TotalExpense'].valid && myForm.controls['TotalExpense'].touched, 'has-success': myForm.controls['TotalExpense'].valid && myForm.controls['TotalExpense'].touched}">
                    <input type="text" placeholder="000,000" style="padding-left:45px" formControlName="TotalExpense" name="TotalExpense" id="TotalExpense" class="form-control text-right" />
                               <span class="icon-left input-icon-text">$</span>
+                              <div class="alert alert-danger" *ngIf="!myForm.controls['TotalExpense'].valid && myForm.controls['TotalExpense'].touched">Expense Details is required!</div>
                </div>
               <div class="col-25 adl-no-paddingL">
                         <button type="button" class="adl-btn adl-no-margin adl-floatR" (click)="hiddenexpense=!hiddenexpense;emptyExpense()" (click)="emptyExpense()" >Add</button>

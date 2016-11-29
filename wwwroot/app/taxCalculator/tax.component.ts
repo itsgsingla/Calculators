@@ -20,9 +20,9 @@ public disableScroll:boolean;
      this.hiddenincome=false;
      this.MarginalTaxRate=3;
    this.myForm = this._fb.group({
-     Age:[0,Validators.required],
+     Age:['',Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(2),Validators.pattern('[0-9]+')])],
      TotalIncome:['',Validators.required],
-     TotalExpense:[''],
+     TotalExpense:['',Validators.required],
      residentofAustralia:[true],
              SalaryIncome: ['',Validators.pattern('[0-9]+')],
              RentalIncome: [''],

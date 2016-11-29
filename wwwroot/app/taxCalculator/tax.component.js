@@ -19,9 +19,9 @@ var TaxComponent = (function () {
         this.hiddenincome = false;
         this.MarginalTaxRate = 3;
         this.myForm = this._fb.group({
-            Age: [0, forms_1.Validators.required],
+            Age: ['', forms_1.Validators.compose([forms_1.Validators.required, forms_1.Validators.minLength(1), forms_1.Validators.maxLength(2), forms_1.Validators.pattern('[0-9]+')])],
             TotalIncome: ['', forms_1.Validators.required],
-            TotalExpense: [''],
+            TotalExpense: ['', forms_1.Validators.required],
             residentofAustralia: [true],
             SalaryIncome: ['', forms_1.Validators.pattern('[0-9]+')],
             RentalIncome: [''],
