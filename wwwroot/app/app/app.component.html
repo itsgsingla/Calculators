@@ -1,0 +1,30 @@
+<div class="adl-container grey-bg">
+        <div class="adl-row">
+          <div class="col-2">
+            <div class="adl-header">
+              <div class="adl-heading">
+                Calculators
+												<div class="adl-title-btns"></div>
+              </div>
+              <div style="height: 90vh"  class="section_body adl-scroll ovrflow-scroll-basic">
+  <ul class="sideNav" id="navbar"><li><a routerLink="/Tax">Tax calculator</a></li></ul>
+   </div></div></div>
+   
+          <div class="col-8" ><md-card>
+      <button md-button>FLAT</button>
+      <button md-raised-button md-tooltip="This is a tooltip!" tooltip-position="after">RAISED</button>
+      <button md-raised-button color="primary">PRIMARY RAISED</button>
+      <button md-raised-button color="accent">ACCENT RAISED</button>
+    </md-card>
+     <div>
+  <button md-button md-tooltip="Hide this button" tooltip-position="after" (click)="fgdgd = true">HIDE ME!</button>
+</div>
+
+<div  *ngIf="!fgdgd">
+  show hide div
+</div>
+
+
+    <router-outlet></router-outlet></div> </div>
+      </div>
+     

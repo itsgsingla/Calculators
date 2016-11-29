@@ -1,0 +1,374 @@
+                     <form [formGroup]="myForm" (ngSubmit)="doLogin(myForm.value)" >
+                       
+<div class="col-10">
+								<div class="adl-header">
+										<div class="adl-heading">Tax Calculator
+												<div class="adl-title-btns">
+														<button class="adl-btn-head" type="submit">Save</button>
+													
+														<button class="adl-btn-head" style="cursor:pointer;" >Reset</button>
+														<!--formodel="relModal" onClick="open_Model(this);"--> 
+												</div>
+										</div>
+								</div>
+
+  	<div style="height:calc(100vh - 60px);position:relative; display:block;" class="adl-scroll ovrflow-scroll-basic" [style.overflow]="setScroll() ? 'hidden': 'auto'" >
+   
+
+     <div class="section_body adl-padding" style="overflow:hidden;">
+							<div class="col-5 cell-border-right calculator-wrap" >
+             <h5 class="adl-padding text-center" style="margin-bottom: 20px;">Please Provide Following Information</h5>
+             
+         <div class="form-horizontal">
+            <div class="adl-form-group col-10 tax-marginD">
+                <label class="control-label col-35">Select Financial Year</label>
+              <div class="col-4 input-with-icon adl-no-paddingL">
+                                <select class="form-control">
+                                  <option>2016-17</option>
+                                </select>
+               </div>
+            </div>
+        </div>
+
+         <div class="form-horizontal">
+            <div class="adl-form-group col-10 tax-marginD">
+                <label class="control-label col-5">Are you Resident of Australia?</label>
+              <div class="col-5 head-switch pageHead"  style="height:22px;">
+                                
+                        <div class="switch yesNoCheckbox" style="margin-top:0px;">
+                            <input type="checkbox" formControlName="residentofAustralia"   id="residentofAustralia" >
+                            <label for="residentofAustralia"></label>
+                        </div>
+               </div>
+            </div>
+        </div>
+
+         <div class="form-horizontal">
+            <div class="adl-form-group col-10 tax-marginD">
+                <label class="control-label col-35">Your Current Age</label>
+              <div class="col-4 input-with-icon adl-no-paddingL">
+                   <input type="text" class="form-control" formControlName="Age" name="Age" id="Age" placeholder="00 Years" />
+               </div>
+            </div>
+        </div>         
+
+         <div class="form-horizontal">
+            <div class="adl-form-group col-10 tax-marginD">
+                <label class="control-label col-35">Income Details</label>
+              <div class="col-4 input-with-icon adl-no-paddingL">
+                   <input type="text" placeholder="000,000" formControlName="TotalIncome" #TotalIncome name="TotalIncome" id="TotalIncome" style="padding-left:40px" class="form-control text-right" />
+                              <span class="icon-left input-icon-text">$</span>
+               </div>
+              <div class="col-25 adl-no-paddingL">
+                        <button type="button" id="test" class="adl-btn adl-no-margin adl-floatR" (click)="hiddenincome=!hiddenincome;emptyIncome();" >Add</button>
+               </div>
+            </div>
+        </div>
+                  
+         <div class="form-horizontal">
+            <div class="adl-form-group col-10 tax-marginD">
+                <label class="control-label col-35">Tax Deductible Expenses</label>
+              <div class="col-4 input-with-icon adl-no-paddingL">
+                   <input type="text" placeholder="000,000" style="padding-left:45px" formControlName="TotalExpense" name="TotalExpense" id="TotalExpense" class="form-control text-right" />
+                              <span class="icon-left input-icon-text">$</span>
+               </div>
+              <div class="col-25 adl-no-paddingL">
+                        <button type="button" class="adl-btn adl-no-margin adl-floatR" (click)="hiddenexpense=!hiddenexpense;emptyExpense()" (click)="emptyExpense()" >Add</button>
+               </div>
+            </div>
+        </div>
+
+         <div class="form-horizontal">
+           
+           <div class="form-horizontal">
+            <div class="adl-form-group col-10 tax-resultAount">
+                <label class="control-label col-35">Your Gross Income</label>
+              <h4 class="col-65 text-blue" style="padding-top: 5px;">${{myForm.value.TotalIncome }}</h4>
+               
+            </div>
+        </div>
+        </div>
+         
+         <div class="form-horizontal">
+                        <div class="adl-form-group col-7 adl-paddingR">
+                            <label class="control-label">&nbsp;</label>
+                            <div class="input-with-icon">
+                              <button type="button" class="adl-btn btn-md adl-no-margin" style="letter-spacing:1px;">CALCULATE</button>
+                            </div>
+                     </div>
+             </div>
+
+							</div>							
+     <div class="col-5  calculator-wrap cell-border-left" style="margin-left:-1px;" >
+       <h5 class="adl-padding text-center" style="margin-bottom: 20px;">Your Computation</h5>
+
+       <div class="SG-Yc">
+
+       <div class="form-horizontal">
+            <div class="adl-form-group col-10 tax-resultAmount">
+                <label class="control-label col-65">Base Income</label>
+              <h4 class="col-35 text-blue text-right">${{BaseIncome}}</h4>
+               
+            </div>
+        </div>
+
+       <div class="form-horizontal">
+            <div class="adl-form-group col-10 tax-resultAmount">
+                <label class="control-label col-65">Tax on Income</label>
+              <h4 class="col-35 text-seagreen text-right">${{TaxOnIncome}}</h4>
+               
+            </div>
+        </div>
+
+       <div class="form-horizontal">
+            <div class="adl-form-group col-10 tax-resultAmount">
+                <label class="control-label col-65">Your Marginal Tax Rate</label>
+              <h4 class="col-35 text-violetOrange text-right">{{MarginalTaxRate}}%</h4>
+               
+            </div>
+        </div>
+       
+         </div> 
+    
+
+       <div class="form-horizontal">
+            <div class="adl-form-group col-10 tax-marginD">
+                <label class="control-label col-10 text-blue">Your are in $3,572 plus 32.5c for each $1 over $37,000 tax slot.</label>
+            </div>
+        </div>
+           
+        <div class="form-horizontal">
+            <div class="adl-form-group col-10 tax-marginD tax-label-button">
+                <label class="control-label col-5">See Tax Assumption Sheet Here</label>
+                <div class="col-5 input-with-icon adl-no-paddingL">
+                              <button type="button" class="adl-btn btn-sm adl-no-margin">Click Here</button>
+                </div>
+            </div>
+        </div>
+
+      
+     </div>
+     </div>
+     
+     
+
+  <div class="section_body calculator-wrap adl-marginB" id="PlanedSavingAssumptions" style="display: block;">
+     <div class="grey-spacer">&nbsp;</div>
+      <div class="adl-header">
+						<div class="adl-heading">Assumptions</div>
+				</div>
+     <div class="budgetCalc-tableWraper">
+       <div class="col-5">
+             <div class="taxRate-previous">
+
+         <h5 class="calc-head-grey">Australian Residents</h5>
+
+																<table width="100%" cellspacing="0" cellpadding="0" class="adl-table adl-full-table adl-table-oddeven adl-full-table ">
+           
+												<tr class="link">
+                    <th class="no-border-top back-seagreen text-left">Tax Rates {{FinancialYear}}</th>
+																			
+                </tr>
+           
+                  </table>
+              <table width="100%" cellspacing="0" cellpadding="0" class="adl-table adl-full-table adl-table-oddeven adl-full-table ">
+            
+                   
+                   
+                <tr class="link">
+                    <th class="no-border-top text-left" style="width:134px">TAXABLE INCOME</th>
+                    <th class="no-border-top text-left">TAX ON THIS INCOME</th>
+																			
+                </tr>
+           
+            
+																	<tr>
+                    <td class=""><b>$0 - $18,200</b></td>
+                    <td class="">Nill</td>
+                </tr>
+																<tr>
+                    <td class=""><b>$18,201 - $37,000</b></td>
+                    <td class="">19c for each $1 over $18,200</td>
+                </tr>
+																
+																<tr>
+                    <td class=""><b>$37,001 - $80,000</b></td>
+                    <td class="">$3,572 plus 32.5c for each $1 over $37,000</td>
+                </tr>
+																<tr>
+                    <td class=""><b>$80,001 - $180,000</b></td>
+                    <td class="">$17,547 plus 37c for each $1 over $80,000</td>
+                </tr>
+																<tr>
+                    <td class=""><b>$180,001 and over*</b></td>
+                    <td class="">$54,547 plus 47c for each $1 over $180,000</td>
+                </tr>
+																<tfoot>
+																<tr>
+                    <td colspan="2" class="back-seagreen">Compulsory superannuation rate: 9.5%</td>
+                </tr>
+																</tfoot>
+									
+        </table>
+																
+         <p>
+																	Budget Repair Levy of 2% on taxable income in excess of $180,000.
+																	</p>
+																</div>
+       </div>
+       <div class="col-5">
+       <div class="taxRate-current">
+          <h5 class="calc-head-grey">Non Residents</h5>
+         <table width="100%" cellspacing="0" cellpadding="0" class="adl-table adl-full-table adl-table-oddeven adl-full-table">
+           
+												<tr class="link">
+                    <th class="no-border-top back-violetRed text-left" colspan="2">Tax Rates {{FinancialYear}}</th>
+																			
+                </tr>
+           
+           </table>
+																<table width="100%" cellspacing="0" cellpadding="0" class="adl-table adl-full-table adl-table-oddeven adl-full-table">
+           
+                <tr class="link">
+                    <th class="no-border-top text-left" width="135px">TAXABLE INCOME</th>
+                    <th class="no-border-top text-left">TAX ON THIS INCOME</th>
+																			
+                </tr>
+           
+            
+																	<tr>
+                    <td class=""><b>$0 – $80,000</b></td>
+                    <td class="">32.5c for each $1</td>
+                </tr>
+																<tr>
+                    <td class=""><b>$80,001 – $180,000</b></td>
+                    <td class="">$26,000 plus 37c for each $1 over $80,000</td>
+                </tr>
+																
+																<tr>
+                    <td class=""><b>$180,001 and over*</b></td>
+                    <td class="">$63,000 plus 47c for each $1 over $180,000</td>
+                </tr>
+																
+																<tfoot>
+																<tr>
+                    <td colspan="2" class="back-violetRed">Compulsory superannuation rate: 9.5%</td>
+                </tr>
+																</tfoot>
+									
+        </table>																
+																<p>Budget Repair Levy of 2% on taxable income in excess of $180,000</p>
+																</div>        
+        </div>
+     </div>
+
+    </div>
+
+
+
+</div>
+
+  
+  <div class="calc-tooltip arrow-left" id="IncomeDetailsPopup" [hidden]="!hiddenincome" [ngStyle]="setPosition()">
+
+    <div class="form-horizontal">
+            <div class="adl-form-group col-10">
+                <label class="control-label col-4">Salary Income</label>
+                <div class="col-6 input-with-icon adl-no-paddingL">
+                              <input type="text" placeholder="000,000" id="input" #SalaryIncome formControlName="SalaryIncome" name="SalaryIncome" style="padding-left:45px" class="form-control text-right" />
+                              <span class="icon-left input-icon-text">$</span>
+                </div>
+            </div>
+        </div><div class="form-horizontal">
+            <div class="adl-form-group col-10">
+                <label class="control-label col-4">Rental Income</label>
+                <div class="col-6 input-with-icon adl-no-paddingL">
+                              <input type="text" placeholder="000,000" formControlName="RentalIncome" name="RentalIncome" style="padding-left:45px" class="form-control text-right" />
+                              <span class="icon-left input-icon-text">$</span>
+                </div>
+            </div>
+        </div>
+    <div class="form-horizontal">
+            <div class="adl-form-group col-10">
+                <label class="control-label col-4">Investment Income</label>
+                <div class="col-6 input-with-icon adl-no-paddingL">
+                              <input type="text" placeholder="000,000" formControlName="InvestmentIncome" name="InvestmentIncome"  style="padding-left:45px" class="form-control text-right" />
+                              <span class="icon-left input-icon-text">$</span>
+                </div>
+            </div>
+        </div>
+    <div class="form-horizontal">
+            <div class="adl-form-group col-10">
+                <label class="control-label col-4">Other Taxable Income</label>
+                <div class="col-6 input-with-icon adl-no-paddingL">
+                              <input type="text" placeholder="000,000" formControlName="OtherIncome" name="OtherIncome"  style="padding-left:45px" class="form-control text-right" />
+                              <span class="icon-left input-icon-text">$</span>
+                </div>
+            </div>
+        </div>
+    <div class="form-horizontal">
+            <div class="col-10">
+                <button type="button" class="adl-btn btn-sm adl-floatR" (click)="calculateIncome()">Save</button>
+              <button type="button" class="adl-btn btn-sm adl-floatR" style="margin-right: 10px;" (click)="hiddenincome=!hiddenincome; enableScroll()">Cancel</button>
+            </div>
+        </div>
+
+  </div>
+
+  
+  <div class="calc-tooltip arrow-left" id="TaxDeductiblePopup" style="display:none; position:fixed">
+    <div class="form-horizontal">
+            <div class="adl-form-group col-10">
+                <label class="control-label col-4">Investment Property</label>
+                <div class="col-6 input-with-icon adl-no-paddingL">
+                              <input type="text" placeholder="000,000" formControlName="InvestmentExpense" name="InvestmentExpense" style="padding-left:45px" class="form-control text-right" />
+                              <span class="icon-left input-icon-text">$</span>
+                </div>
+            </div>
+        </div><div class="form-horizontal">
+            <div class="adl-form-group col-10">
+                <label class="control-label col-4">Depreciations</label>
+                <div class="col-6 input-with-icon adl-no-paddingL">
+                              <input type="text" placeholder="000,000"  formControlName="DepreciationExpense" name="DepreciationExpense"  style="padding-left:45px" class="form-control text-right" />
+                              <span class="icon-left input-icon-text">$</span>
+                </div>
+            </div>
+        </div>
+    <div class="form-horizontal">
+            <div class="adl-form-group col-10">
+                <label class="control-label col-4">Tax Diductible Invests</label>
+                <div class="col-6 input-with-icon adl-no-paddingL">
+                              <input type="text" placeholder="000,000" formControlName="TaxDiductibleExpense" name="TaxDiductibleExpense"  style="padding-left:45px" class="form-control text-right" />
+                              <span class="icon-left input-icon-text">$</span>
+                </div>
+            </div>
+        </div>
+    <div class="form-horizontal">
+            <div class="adl-form-group col-10">
+                <label class="control-label col-4">Other Expenses</label>
+                <div class="col-6 input-with-icon adl-no-paddingL">
+                              <input type="text" placeholder="000,000" style="padding-left:45px" formControlName="OtherExpense" name="OtherExpense"   class="form-control text-right" />
+                              <span class="icon-left input-icon-text">$</span>
+                </div>
+            </div>
+        </div>
+    <div class="form-horizontal">
+            <div class="adl-form-group col-10">
+                <label class="control-label col-4">Work Related Expenses</label>
+                <div class="col-6 input-with-icon adl-no-paddingL">
+                              <input type="text" placeholder="000,000" style="padding-left:45px" formControlName="WorkRelExpense" name="WorkRelExpense" class="form-control text-right" />
+                              <span class="icon-left input-icon-text">$</span>
+                </div>
+            </div>
+        </div>
+    <div class="form-horizontal">
+            <div class="col-10">
+                <button type="button" class="adl-btn btn-sm adl-floatR">Save</button>
+              <button type="button" class="adl-btn btn-sm adl-floatR" style="margin-right: 10px;">Cancel</button>
+            </div>
+        </div>
+
+  </div>
+   
+</div>
+                     </form>
